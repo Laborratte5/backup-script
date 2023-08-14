@@ -10,8 +10,16 @@ empty_dir=$(mktemp -d)
 BACKUP_LOCATION="${BACKUP_LOCATION}-$(date +'%Y-%m-%d').sqsh"
 CHECKSUM_FILE="$DEVICE_NAME.img.cksum"
 
-echo Backup: $DRIVE_TO_BACKUP
-echo To: $BACKUP_LOCATION
+echo
+echo Backup source: $DRIVE_TO_BACKUP
+echo Backup destination: $BACKUP_LOCATION
+echo
+
+echo Check if your input is correct
+echo Double check the correct usage of source and destination
+echo \"Backup source\" is the drive you want to backup
+echo \"Backup destination\" is where the backup will be stored
+read -n1 -r -s -p $"Press space to continue..."
 
 mksquashfs $empty_dir $BACKUP_LOCATION -p "$DEVICE_NAME.img f 444 root root dd if=$DRIVE_TO_BACKUP bs=4M" -p "$CHECKSUM_FILE f 444 root root dd if=$DRIVE_TO_BACKUP | cksum"
 
