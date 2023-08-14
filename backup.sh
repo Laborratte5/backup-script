@@ -1,6 +1,6 @@
 #!/bin/bash
-read -e -p "Drive to backup: " DRIVE_TO_BACKUP
-read -e -p "Location of backup: " BACKUP_LOCATION
+read -e -p "Backup source: " DRIVE_TO_BACKUP
+read -e -p "Backup destination: " BACKUP_LOCATION
 
 DEVICE_NAME=$(basename $DRIVE_TO_BACKUP)
 
