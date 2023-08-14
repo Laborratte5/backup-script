@@ -30,7 +30,7 @@ DRIVE_CKSUM=$(dd if=$DRIVE_TO_BACKUP | cksum)
 diff <(echo $DRIVE_CKSUM) <(cat $BACKUP_MNT/$CHECKSUM_FILE)
 if [ $? -ne 0 ]; then
 	echo -e "\e[1;41m Backup not consistent! \e[0m"
-	exit -1
+	exit 1
 fi
 
 # Recalculate checksums
@@ -40,7 +40,7 @@ IMG_CKSUM=$(dd if=$BACKUP_MNT/$DEVICE_NAME.img | cksum)
 diff <(echo $IMG_CKSUM) <(cat $BACKUP_MNT/$CHECKSUM_FILE)
 if [ $? -ne 0 ]; then
 	echo -e "\e[1;41m Backup not consistent! \e[0m"
-	exit -1
+	exit 1
 fi
 
 umount $BACKUP_LOCATION
